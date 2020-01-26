@@ -1,7 +1,9 @@
 # nodeFarm
 
 하기 강좌의 첫번째 실습 프로젝트를 나만의 방식으로 재구성.
-간단한 JSON API Server 및 해당 API를 활용한 HTTP Server 구성
+
+- 간단한 JSON API Server 및 해당 API를 활용한 HTTP Server 구성
+- 기본적인 수준의 템플릿 엔진 흉내내기
 
 ## 강좌정보
 
