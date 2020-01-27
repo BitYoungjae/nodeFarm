@@ -8,11 +8,11 @@ const main = async () => {
   const server = createServer();
 
   server.on('request', async (req, res) => {
-    const { path, query } = parse(req.url);
-    if (path === '/favicon.ico') return res.end();
+    const { pathname, query } = parse(req.url);
+    if (pathname === '/favicon.ico') return res.end();
 
     const queryMap = parseQuery(query);
-    const [, mainMethod, ...pathList] = path.split('/');
+    const [, mainMethod, ...pathList] = pathname.split('/');
 
     res.writeHead(200, {
       'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ const main = async () => {
     switch (mainMethod) {
       case '':
       case 'overview':
-        await overviewHandler(res, pathList);
+        await overviewHandler(res, queryMap);
         break;
       case 'api':
         await apiHandler(res, pathList);
