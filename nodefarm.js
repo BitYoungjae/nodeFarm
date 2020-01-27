@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 import { parse } from 'url';
-import { parseQuery } from './lib/queryParser.js';
+// import { parseQuery } from './lib/queryParser.js';
 import { apiHandler, overviewHandler, initData } from './lib/routing.js';
 
 const main = async () => {
@@ -8,10 +8,10 @@ const main = async () => {
   const server = createServer();
 
   server.on('request', async (req, res) => {
-    const { pathname, query } = parse(req.url);
+    const { pathname, query } = parse(req.url, true);
     if (pathname === '/favicon.ico') return res.end();
 
-    const queryMap = parseQuery(query);
+    // const queryMap = parseQuery(query);
     const [, mainMethod, ...pathList] = pathname.split('/');
 
     res.writeHead(200, {
@@ -21,7 +21,7 @@ const main = async () => {
     switch (mainMethod) {
       case '':
       case 'overview':
-        await overviewHandler(res, queryMap);
+        await overviewHandler(res, query);
         break;
       case 'api':
         await apiHandler(res, pathList);
